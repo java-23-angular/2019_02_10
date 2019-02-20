@@ -1,0 +1,24 @@
+<div class="row" *ngIf="service.contacts.length !== 0; else empty">
+  <div class="col-6">
+    <div class="list-group">
+      <a *ngFor="let contact of service.contacts; let i = index"
+        [routerLink]="['/contacts',i]"
+      class="list-group-item list-group-item-action">
+        <app-contact-row [curr] = "contact"></app-contact-row>
+      </a>
+    </div>
+  </div>
+  <div class="col-6">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<ng-template #empty>
+  <div class="row">
+    <div class="col-6">
+      <p>Empty list add contacts</p>
+    </div>
+    <div class="col-2">
+      <button class="btn btn-primary" (click)="goToAdd()">Add</button>
+    </div>
+  </div>
+</ng-template>
