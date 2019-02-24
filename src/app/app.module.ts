@@ -9,13 +9,15 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
 import { ContactInfoComponent } from './contact-info/contact-info.component';
 import {RouterModule, Routes} from '@angular/router';
 import {FormsModule} from '@angular/forms';
+import {StoreProvider} from './store.provider';
+import {AuthGuardService} from './auth.guard.service';
 
 const routes: Routes = [
   {path:'', component: MainComponent},
   {path:'contacts', component:ContactsComponent, children:[
       {path:':index',component:ContactInfoComponent}
     ]},
-  {path:'add', component:ContactFormComponent},
+  {path:'add', component:ContactFormComponent, canActivate:[AuthGuardService]},
   {path:'**', redirectTo:''}
 ];
 @NgModule({
@@ -32,7 +34,7 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [StoreProvider,AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

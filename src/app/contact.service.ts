@@ -1,14 +1,33 @@
 import {ContactModel} from './contact.model';
+import {StoreProvider} from './store.provider';
+import {Injectable} from '@angular/core';
 
+@Injectable()
 export class ContactService {
   contacts: ContactModel[] = [];
-  constructor(){
-    this.contacts.push(new ContactModel("test","test","test","test","test"));
-    this.contacts.push(new ContactModel("test1","test","test","test","test"));
-    this.contacts.push(new ContactModel("test2","test","test","test","test"));
-    this.contacts.push(new ContactModel("test3","test","test","test","test"));
-    this.contacts.push(new ContactModel("test4","test","test","test","test"));
-    this.contacts.push(new ContactModel("test5","test","test","test","test"));
-    this.contacts.push(new ContactModel("test6","test","test","test","test"));
+  constructor(private storeProvider: StoreProvider){
+    this.contacts = storeProvider.getAll();
+    if(this.contacts == null){
+      this.contacts = [];
+    }
+  }
+
+  getAllContacts():ContactModel[]{
+    return this.contacts;
+  }
+
+  updateContact(index: number, contact: ContactModel):void{
+    this.contacts[index] = contact;
+    this.storeProvider.saveAll(this.contacts);
+  }
+
+  deleteContact(index: number){
+    this.contacts.splice(index,1);
+    this.storeProvider.saveAll(this.contacts);
+  }
+
+  addContact(contact: ContactModel){
+    this.contacts.push(contact);
+    this.storeProvider.saveAll(this.contacts);
   }
 }

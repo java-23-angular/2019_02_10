@@ -24,23 +24,24 @@ export class ContactFormComponent implements OnInit {
   ngOnInit() {
   }
 
-  addContactClick():void{
+  addContactClick(): void {
     let curr: ContactModel = new ContactModel(this.name,
-      this.lastName,this.phone,this.email,this.address);
-    for(let c of this.service.contacts){
-      if(c.email === curr.email){
+      this.lastName, this.phone, this.email, this.address);
+    for (let c of this.service.contacts) {
+      if (c.email === curr.email) {
         this.isShowDanger = true;
         setTimeout(() => {
           this.isShowDanger = false;
-        },2000);
+        }, 2000);
         return;
       }
     }
-    this.service.contacts.push(curr);
+    // this.service.contacts.push(curr);
+    this.service.addContact(curr);
     this.isShowSuccess = true;
-    setTimeout(()=>{
+    setTimeout(() => {
       this.isShowSuccess = false;
-    },2000);
+    }, 2000);
     this.name = '';
     this.lastName = '';
     this.email = '';

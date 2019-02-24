@@ -1,7 +1,7 @@
 <div class="row" *ngIf="service.contacts.length !== 0; else empty">
   <div class="col-6">
     <div class="list-group">
-      <div *ngFor="let contact of service.contacts; let i = index"
+      <div *ngFor="let contact of service.getAllContacts(); let i = index"
         [routerLink]="['/contacts',i]"
       class="list-group-item list-group-item-action">
         <app-contact-row [curr] = "contact" [indx]="i"></app-contact-row>

@@ -16,17 +16,16 @@ export class ContactRowComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((value: Params) => {
-      this.routeIndex = +value['index'];
+      this.routeIndex = value['index'];
+      console.log(value);
     });
   }
 
   onDeleteClick() {
     if(this.index >= 0 && this.index < this.service.contacts.length){
-      if(this.routeIndex == this.index){
-        this.router.navigate(['/contacts'],{relativeTo:this.activatedRoute});
-      }
-      this.service.contacts.splice(this.index,1);
-
+      this.router.navigate(['/contacts']);
+      // this.service.contacts.splice(this.index,1);
+      this.service.deleteContact(this.index);
     }
   }
 }

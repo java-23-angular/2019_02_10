@@ -46,7 +46,8 @@ export class ContactInfoComponent implements OnInit {
 
   onSaveClick() {
     this.curr = this.currCopy;
-    this.service.contacts[this.index] = this.curr;
+    // this.service.contacts[this.index] = this.curr;
+    this.service.updateContact(this.index,this.curr);
     this.isEditMode = false;
   }
 
