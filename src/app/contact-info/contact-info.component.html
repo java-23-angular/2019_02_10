@@ -1,10 +1,23 @@
-<div *ngIf="curr != null">
-  <div class="card">
+<div>
+  <div class="card" *ngIf="curr != null && !isEditMode">
     <div class="card-body">
       <h5 class="card-title" style="color:#00006e">{{curr.name + ' ' + curr.lastName}}</h5>
       <h5 class="card-title">{{curr.phone}}</h5>
       <h6 class="card-subtitle">{{curr.email}}</h6><br/>
       <h6 class="card-subtitle">{{curr.address}}</h6>
+      <button class="btn btn-primary" style="margin-top: 10px" (click)="onEditClick()">Edit</button>
+
     </div>
   </div>
+    <div class="card" *ngIf="isEditMode">
+      <div class="card-body">
+        <input type="text" class="form-control" [(ngModel)]="currCopy.name">
+        <input type="text" class="form-control" [(ngModel)]="currCopy.lastName">
+        <input type="text" class="form-control" [(ngModel)]="currCopy.phone">
+        <input type="text" class="form-control" [(ngModel)]="currCopy.email">
+        <input type="text" class="form-control" [(ngModel)]="currCopy.address">
+        <button class="btn btn-success" style="margin-right: 15px" (click)="onSaveClick()">Save</button>
+        <button class="btn btn-primary" (click)="OnCancelClick()">Cancel</button>
+      </div>
+    </div>
 </div>

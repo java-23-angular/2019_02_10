@@ -36,7 +36,6 @@ export class ContactFormComponent implements OnInit {
         return;
       }
     }
-    localStorage.setItem('name',curr.email);
     this.service.contacts.push(curr);
     this.isShowSuccess = true;
     setTimeout(()=>{
